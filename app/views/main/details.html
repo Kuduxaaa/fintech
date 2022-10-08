@@ -1,0 +1,170 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Administration {% endblock %}
+
+{% block body %}
+
+<nav class="navigation">
+    <div class="container flex">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.svg') }}" draggable="false" alt="FIA Rental">
+            </a>
+        </div>
+        <div class="menu">
+            <a href="/admin" class="selected">მთავარი</a>
+
+            <a href="/admin/orders">ორდერები</a>
+            <a href="/logout">
+                <button class="btn btn-secondary">გასვლა</button>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="images">
+    {% for file in order['files'] %}
+    <img src="/{{ file }}" alt="Analyzed Image" class="image" />
+    <img src="/{{ file }}" alt="Analyzed Image" class="image" />
+    <img src="/{{ file }}" alt="Analyzed Image" class="image" />
+    {% endfor %}
+</div>
+
+
+<div class="right">
+    <div class="accept-card"
+        style="position:fixed;bottom:20px;right:50px;padding: 26px;background: #fff;border-radius: 18px;max-width: 300px;text-align: center;margin-bottom: 20px;box-shadow: 0px 1px 10px #00000017;">
+        <h2>ორდერის დამტკიცება?</h2>
+        <p style="font-size:12px;">თუ გინდათ რომ დატანხმდეთ ამ შეთავაზებას დააწექით "მიღება" -ს წინააღმდეგ
+            შემთხვევაში დააწექით "უარყოფა" -ს</p>
+        <br>
+
+        <button style="margin-bottom: 0px;" class="w-100 btn">მიღება</button>
+        <button onclick="hideMe()" class="w-100 btn btn-secondary">უარყოფა</button>
+    </div>
+</div>
+
+<div class="flex">
+    <div class="flex" style="justify-content: space-between;width: 355px; ">
+        <div class="left"
+            style="margin: 32px 22px;padding: 26px;background: #fff;border-radius: 18px;max-width: 300px;margin-bottom: 20px;box-shadow: 0px 1px 10px #00000017;height: 346px;">
+            <p>ბრენდის კოდი: <span style="color:hsl(254, 74%, 42%);">{{ order['brand'] }}</span></p>
+            <p>გამოშვების წელი: <span style="color:hsl(254, 74%, 42%);">{{ order['year'] }}</span></p>
+            <p>ტელ. ნომერი: <span style="color:hsl(254, 74%, 42%);">{{ order['phone_number'] }}</span></p>
+            <p>ტექ. პასპორტი: <span style="color:hsl(254, 74%, 42%);">{{ order['tech_passport_number'] }}</span></p>
+            <p>VIN კოდი: <span style="color:hsl(254, 74%, 42%);">{{ order['vin_code'] }}</span></p>
+            <p>სახ. ნომერი: <span style="color:hsl(254, 74%, 42%);">{{ order['plate_number'] }}</span></p>
+            <br>
+            <button onclick="analyzeImage()" style="margin: 10px auto;" class="w-100 btn">ანალიზი</button>
+        </div>
+    </div>
+
+    <div class="text-secondary flex" style="margin: 38px auto 0px 0px;">
+        <ul style="padding: 26px;background: #fff;border-radius: 18px;max-width: 300px;margin-bottom: 20px;box-shadow: 0px 1px 10px #00000017;height: 346px;margin-top: -5px;padding:28px 35px;">
+            <li>წელი: {{ vin['specification']['year'] }}</li>
+            <li>მწარმოებელი: {{ vin['specification']['make'] }}</li>
+            <li>მოდელი: {{ vin['specification']['model'] }}</li>
+            <li>ძრავი: {{ vin['specification']['engine'] }}</li>
+            <li>სტილი: {{ vin['specification']['style'] }}</li>
+            <li>ქვეყანა: {{ vin['specification']['made_in'] }}</li>
+            <li>ავზის მოცულობა: {{ vin['specification']['tank_size'] }}</li>
+            <li>წონა: {{ vin['specification']['overall_width'] }}</li>
+            <li>საწვავის ტიპი: {{ vin['specification']['fuel_type'] }}</li>
+            <li>ტრანსმისია: {{ vin['specification']['transmission'] }}</li>
+            <li>ხიდი: {{ vin['specification']['drive_type'] }}</li>
+        </ul>
+
+        <ul style="padding: 26px;background: #fff;border-radius: 18px;max-width: 300px;margin-bottom: 20px;box-shadow: 0px 1px 10px #00000017;height: 346px;margin-top: -5px;padding:28px 35px;margin-left: 30px;">
+            <li>საშუალო ფასი: <span id="aprice">$8900</span></li>
+            <li>დაზიანებული ნაწილის ფასი: <span id="gprice">100.00 GEL</span></li>
+            <li>დაზიანებული ნაწილი: ბამპერი</li>
+        </ul>
+    </div>
+    
+
+</div>
+
+
+
+<script>
+
+    let aprice = document.getElementById('aprice');
+    let gprice = document.getElementById('gprice');
+
+    function hideMe() {
+        let accept = document.querySelector('.accept-card');
+        if (accept) {
+            accept.style.display = 'none';
+        }
+    }
+
+    function analyzeImage() {
+        let file = '/{{order["files"][0]}}'.split('/');
+        let xhttp = new XMLHttpRequest();
+
+        file = file[file.length - 1];
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                Swal.close();
+                Swal.fire({
+                    imageUrl: `/public/uploads/${data.src}`,
+                    imageWidth: 1000,
+                    imageHeight: 375,
+                    confirmButtonText: 'დახურვა'
+                });
+                
+            }
+        };
+
+        Swal.fire({
+            width: 400,
+            title: 'გთხოოვთ მოიცადოთ',
+            html: 'მიმდინარეობს ფოტოს ანალიზი',// add html attribute if you want or remove
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+        });
+
+        xhttp.open('GET', '/api/v1/predict-damage?image=' + file, true);
+        xhttp.send();
+    }
+</script>
+
+<style>
+    .flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .image {
+        width: 387px;
+        margin: 0px auto;
+        border-radius: 12px;
+        box-shadow: 0px 1px 10px #00000014;
+        text-align: center;
+        margin: 4px;
+    }
+
+    .images {
+        text-align: center;
+        justify-content: start;
+        margin-top: 28px;
+        display: flex;
+        overflow: auto;
+        padding: 0px 12px;
+    }
+
+    .swal2-container.swal2-center > .swal2-popup {
+        max-width: 1100px;
+        width: 100%;
+    }
+
+  
+</style>
+{% endblock %}

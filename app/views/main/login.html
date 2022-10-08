@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block body %}
+    
+
+<div class="container">
+    <img src="{{ url_for('static', filename='img/dots.svg') }}" class="bg-asset" draggable="false">
+    <div class="container order" style="margin-top: 180px;">
+        <div class="flex">
+            <div class="order left text-center w-100">
+                <h1>ავტორიზაცია</h1>
+                <p class="text-secondary">გასაგრძელებლად შედით სისტემაში!</p>
+
+                <form action="" class="order-form" method="post">
+                    <input type="text" name="username" placeholder="მომხმარებლის სახელი" autocomplete="off" />
+                    <input type="password" name="password" placeholder="პაროლი" autocomplete="off" />
+                    <button type="submit" id="orderNow" class="btn">დასრულება</button>
+                </form>
+            </div>
+
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

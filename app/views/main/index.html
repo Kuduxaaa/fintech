@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block body %}
+    
+{% include 'inc/header.html' %}
+<div class="container">
+    <img src="{{ url_for('static', filename='img/dots.svg') }}" class="bg-asset" draggable="false">
+    <div class="hero container">
+        <div class="hero-content flex">
+            <div class="left">
+                <h1>ფინტექის პროგრამა</h1>
+                <p>გრძელი სიტყვა მოკლედ ითქმისო… ჯერ კიდევ როდის დაწერა ეს შოთა რუსთაველმა მართალია, შემდეგ უზარმაზარი ტექსტი მოაყოლა, მაგრამ ეს სხვა თემაა და მართალიც აღმოჩნდა. მიუხედავად იმისა, რომ პირადად მე ვრცელ ნაწარმოებებს ვანიჭებ უპირატესობას, უნდა ვაღიარო, რომ ხშირად კარგი მოთხრობა წარუშლელ</p>
+
+                <div class="buttons flex">
+                    <a href="javascript:void(0);">
+                        <button id="getStarted" class="btn">კალკულაცია</button>
+                    </a>
+                    <a href="{{ url_for('main.order') }}">
+                        <button class="btn btn-secondary">ავტო სესხი</button>
+                    </a>
+                </div>
+            </div>
+            <div class="right">
+                <img src="{{ url_for('static', filename='img/car.svg') }}" alt="FIA Car">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

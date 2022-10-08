@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Administration {% endblock %}
+
+{% block body %}
+
+<nav class="navigation">
+    <div class="container flex">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.svg') }}" draggable="false" alt="FIA Rental">
+            </a>
+        </div>
+        <div class="menu">
+            <a href="/admin" class="selected">მთავარი</a>
+
+            <a href="/admin/orders">ორდერები</a>
+            <a href="/logout">
+                <button class="btn btn-secondary">გასვლა</button>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <br><br><br>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">#</div>
+            <div class="col col-2">Brand</div>
+            <div class="col col-3">Model</div>
+            <div class="col col-4">Plate Number</div>
+            <div class="col col-4">Phone Number</div>
+            <div class="col col-4">Action</div>
+        </li>
+        {% for order in orders %}
+            <li class="table-row">
+                <div class="col col-1" data-label="#">{{ order['id'] }}</div>
+                <div class="col col-2" data-label="Brand">{{ order['brand'] }}</div>
+                <div class="col col-3" data-label="Model">{{ order['model'] }}</div>
+                <div class="col col-4" data-label="Plate Number">{{ order['plate_number'] }}</div>
+                <div class="col col-4" data-label="phone Number">{{ order['phone_number'] }}</div>
+                <div class="col col-4" data-label="Action">
+                    <a href="/admin/details/{{ order['id'] }}">Details</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

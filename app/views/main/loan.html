@@ -1,0 +1,171 @@
+{% extends 'layouts/base.html' %}
+
+{% block body %}
+    
+{% include 'inc/header.html' %}
+
+<div class="container">
+    <img src="{{ url_for('static', filename='img/dots.svg') }}" class="bg-asset" draggable="false">
+    <div class="container order">
+        <div class="flex">
+            <div class="order left text-center w-100">
+                <h1>ავტო სესხი</h1>
+                <p class="text-secondary">მიიღე ავტო სესხი წამებში, სახლიდან გაუსვლელად!</p>
+
+                <form action="" class="order-form" method="post" enctype="multipart/form-data">
+                    <div class="flex jc">
+                        <select name="brand">   
+                            <option value="0">აირჩიეთ ბრენდი</option>
+                            <option value="473">ARCFOX</option>
+                            <option value="70">ACURA</option>
+                            <option value="1">ALFA ROMEO</option>
+                            <option value="441">AMC</option>
+                            <option value="565">ARCTIC CAR</option>
+                            <option value="76">ASTON MARTIN</option>
+                            <option value="2">AUDI</option>
+                            <option value="400">BAIC</option>
+                            <option value="78">BENTLEY</option>
+                            <option value="3">BMW</option>
+                            <option value="207">BRILLIANCE</option>
+                            <option value="374">BUGATTI</option>
+                            <option value="69">BUICK</option>
+                            <option value="87">BYD</option>
+                            <option value="4">CADILLAC</option>
+                            <option value="161">CHANGAN</option>
+                            <option value="84">CHERY</option>
+                            <option value="5">CHEVROLET</option>
+                            <option value="6">CHRYSLER</option>
+                            <option value="7">CITROEN</option>
+                            <option value="237">CPI</option>
+                            <option value="457">DACIA</option>
+                            <option value="8">DAEWOO</option>
+                            <option value="9">DAIHATSU</option>
+                            <option value="537">DATSUN</option>
+                            <option value="244">DM TELAI</option>
+                            <option value="10">DODGE</option>
+                            <option value="146">DONGFENG</option>
+                            <option value="360">FAW</option>
+                            <option value="74">FERRARI</option>
+                            <option value="11">FIAT</option>
+                            <option value="183">FISKER</option>
+                            <option value="12">FORD</option>
+                            <option value="157">FORTSCHRITT</option>
+                            <option value="143">FOTON</option>
+                            <option value="45">GAZ</option>
+                            <option value="89">GEELY</option>
+                            <option value="13">GMC</option>
+                            <option value="138">GREATWALL</option>
+                            <option value="176">HAVAL</option>
+                            <option value="14">HONDA</option>
+                            <option value="485">HONGQI</option>
+                            <option value="489">HUAWEI</option>
+                            <option value="15">HUMMER</option>
+                            <option value="167">HYSTER</option>
+                            <option value="16">HYUNDAI</option>
+                            <option value="53">INFINITI</option>
+                            <option value="422">IRAN KHODRO</option>
+                            <option value="17">ISUZU</option>
+                            <option value="62">IVECO</option>
+                            <option value="85">JAC</option>
+                            <option value="18">JAGUAR</option>
+                            <option value="19">JEEP</option>
+                            <option value="533">KAMA</option>
+                            <option value="159">KARSAN</option>
+                            <option value="20">KIA</option>
+                            <option value="73">LAMBORGHINI</option>
+                            <option value="21">LANCIA</option>
+                            <option value="22">LAND ROVER</option>
+                            <option value="469">LEAPMOTOR</option>
+                            <option value="23">LEXUS</option>
+                            <option value="493">LI XIANG</option>
+                            <option value="162">LIFAN</option>
+                            <option value="58">LINCOLN</option>
+                            <option value="401">LONKING</option>
+                            <option value="341">LOTUS</option>
+                            <option value="377">LTI</option>
+                            <option value="75">MASERATI</option>
+                            <option value="80">MAYBACH</option>
+                            <option value="24">MAZDA</option>
+                            <option value="403">MCLAREN</option>
+                            <option value="25">MERCEDES-BENZ</option>
+                            <option value="26">MERCURY</option>
+                            <option value="166">MG</option>
+                            <option value="28">MINI</option>
+                            <option value="29">MITSUBISHI</option>
+                            <option value="553">MITSUOKA</option>
+                            <option value="48">MOSKVICH</option>
+                            <option value="144">NAZ</option>
+                            <option value="179">NIEWIADOW</option>
+                            <option value="30">NISSAN</option>
+                            <option value="31">OPEL</option>
+                            <option value="32">PEUGEOT</option>
+                            <option value="54">PONTIAC</option>
+                            <option value="33">PORSCHE</option>
+                            <option value="410">PROTON</option>
+                            <option value="34">RENAULT</option>
+                            <option value="88">ROEWE</option>
+                            <option value="79">ROLLS-ROYCE</option>
+                            <option value="35">ROVER</option>
+                            <option value="36">SAAB</option>
+                            <option value="93">SATURN</option>
+                            <option value="55">SCION</option>
+                            <option value="37">SEAT</option>
+                            <option value="38">SKODA</option>
+                            <option value="424">SMART</option>
+                            <option value="397">SOUEAST</option>
+                            <option value="64">SSANGYONG</option>
+                            <option value="39">SUBARU</option>
+                            <option value="40">SUZUKI</option>
+                            <option value="92">TATA</option>
+                            <option value="155">TESLA</option>
+                            <option value="41">TOYOTA</option>
+                            <option value="95">UAZ</option>
+                            <option value="44">VAZ</option>
+                            <option value="42">VOLKSWAGEN</option>
+                            <option value="43">VOLVO</option>
+                            <option value="481">VOYAH</option>
+                            <option value="158">XINGTAI</option>
+                            <option value="497">XPENG</option>
+                            <option value="390">YTO</option>
+                            <option value="97">ZAZ</option>
+                            <option value="477">ZEEKR</option>
+                            <option value="549">ZUKIDA</option>
+                            <option value="376">ZXAUTO</option>
+                        </select>
+
+
+                        <select name="year">
+                            <option value="0">აირჩიეთ წელი</option>
+                            {% for _year in range(1950, year) %}
+                                <option value="{{ _year }}">{{ _year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    
+
+                    <input type="text" name="brandModel" placeholder="შეიყვანეთ მანქანის მოდელი მაგ. astra" autocomplete="off" />
+                    <input type="text" name="vinCode" placeholder="შეიყვანეთ VIN კოდი" autocomplete="off" />
+                    <input type="text" name="plateNumber" placeholder="სახელმწიფო ნომერი" autocomplete="off" />
+                    <input type="text" name="techPassportNo" placeholder="შეიყვანეთ ტექ. პასპორტის ნომერი" autocomplete="off" />
+                    <input type="number" name="phone_number" placeholder="შეიყვანეთ ტექ. პასპორტის ნომერი" autocomplete="off" />
+
+                    <div class="photo">
+                        <div class="drag-zone">
+                            <label for="file" class="text-secondary">ატვირთეთ ფოტოები</label>                   
+                            <input type="file" name="files[]" id="file" multiple>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="orderNow" class="btn">დასრულება</button>
+                    
+                </form>
+            </div>
+
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
