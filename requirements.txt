@@ -9,7 +9,7 @@ MarkupSafe==1.1.1
 requests==2.25.1
 urllib3==1.26.5
 waitress==2.1.2
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 pymysql
 flask_sqlalchemy
 flask_restful
